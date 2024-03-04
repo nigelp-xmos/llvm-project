@@ -53,14 +53,15 @@ private:
   static const unsigned CodeModelShift = LastAlignmentBit + 1;
 
 public:
-  /// GlobalVariable ctor - If a parent module is specified, the global is
-  /// automatically inserted into the end of the specified modules global list.
+  /// GlobalVariable ctor - This creates a global without inserting it into a
+  /// module.
   GlobalVariable(Type *Ty, bool isConstant, LinkageTypes Linkage,
                  Constant *Initializer = nullptr, const Twine &Name = "",
                  ThreadLocalMode = NotThreadLocal, unsigned AddressSpace = 0,
                  bool isExternallyInitialized = false);
   /// GlobalVariable ctor - This creates a global and inserts it before the
-  /// specified other global.
+  /// specified other global. If no other global is specified, the new global
+  /// is inserted into the end of the specified module's global list.
   GlobalVariable(Module &M, Type *Ty, bool isConstant, LinkageTypes Linkage,
                  Constant *Initializer, const Twine &Name = "",
                  GlobalVariable *InsertBefore = nullptr,

@@ -4043,8 +4043,16 @@ runtime).
 Important Public Members of the ``GlobalVariable`` class
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-* ``GlobalVariable(const Type *Ty, bool isConstant, LinkageTypes &Linkage,
-  Constant *Initializer = 0, const std::string &Name = "", Module* Parent = 0)``
+* ``GlobalVariable(Type *Ty, bool isConstant, LinkageTypes Linkage,
+  Constant *Initializer = nullptr, const Twine &Name = "",
+  ThreadLocalMode = NotThreadLocal, unsigned AddressSpace = 0,
+  bool isExternallyInitialized = false)``
+
+* ``GlobalVariable(Module &M, Type *Ty, bool isConstant, LinkageTypes Linkage,
+  Constant *Initializer, const Twine &Name = "",
+  GlobalVariable *InsertBefore = nullptr, ThreadLocalMode = NotThreadLocal,
+  std::optional<unsigned> AddressSpace = std::nullopt,
+  bool isExternallyInitialized = false)``
 
   Create a new global variable of the specified type.  If ``isConstant`` is true
   then the global variable will be marked as unchanging for the program.  The
